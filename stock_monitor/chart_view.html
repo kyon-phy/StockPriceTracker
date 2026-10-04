@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>StockPriceTracker · Local charts</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1120;--panel:#121c2e;--edge:#26344a;--text:#e7edf7;--muted:#a5b4ca;--mint:#64e2bc;--amber:#f7c76c;--blue:#83adff;--purple:#bf9df8;--red:#fa91a0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,select,input{font:inherit}button,select{color:var(--text);background:#1b2940;border:1px solid #40526e;border-radius:7px;padding:8px 12px;min-height:40px}button{cursor:pointer}button:hover{border-color:var(--mint)}button[aria-pressed="true"]{background:#244b47;color:#c8ffed;border-color:var(--mint)}:focus-visible{outline:3px solid var(--amber);outline-offset:3px}button:disabled{opacity:.5;cursor:default}.shell{max-width:1370px;margin:auto;padding:26px 36px 36px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--edge);padding-bottom:20px}.brand{display:flex;gap:12px;align-items:center}.logo{color:var(--mint);background:#193730;font-size:24px;padding:1px 10px;border-radius:9px}.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:650}h1{font-size:19px;letter-spacing:-.4px;margin:2px 0}h2{font-size:15px;margin:0}h3{font-size:14px;margin:0}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{font-size:11px;font-weight:650;letter-spacing:.04em;border:1px solid var(--edge);border-radius:6px;padding:5px 9px;color:var(--muted)}.badge.demo{background:#332b18;color:var(--amber);border-color:#6b5530}.badge.local{color:var(--mint);background:#142d29}.toolbar{display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap;margin:22px 0 18px}.field label{display:block;font-size:11px;font-weight:650;color:var(--muted);margin-bottom:5px;letter-spacing:.06em;text-transform:uppercase}#stock{min-width:250px}.range{display:flex;gap:4px}.range button{min-width:47px;padding:8px}.controls{display:flex;gap:16px;flex-wrap:wrap}.hero{display:grid;grid-template-columns:1.1fr 2fr;gap:22px;align-items:center;margin:0 0 16px}.instrument{display:flex;align-items:baseline;gap:14px}.symbol{font-size:32px;font-weight:700;letter-spacing:-1px}.price{font-size:30px;font-weight:500;letter-spacing:-1px;font-variant-numeric:tabular-nums}.sub{color:var(--muted);font-size:12px;margin-top:2px}.meta{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:20px}.meta dt{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.meta dd{margin:4px 0 0;font-size:12px;font-weight:550}.notice{border-left:3px solid var(--amber);background:#24251e;color:#ebdcb6;border-radius:3px;padding:9px 12px;font-size:12px;margin:0 0 14px}.notice.error{border-color:var(--red);color:#ffc4cc;background:#302029}.panel{border:1px solid var(--edge);background:var(--panel);border-radius:11px;margin-bottom:12px;overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px 3px;flex-wrap:wrap}.legend{display:flex;gap:17px;flex-wrap:wrap;font-size:11px;font-variant-numeric:tabular-nums}.legend span::before{content:"";display:inline-block;width:13px;height:2px;background:currentColor;vertical-align:middle;margin-right:6px}.mint{color:var(--mint)}.amber{color:var(--amber)}.blue{color:var(--blue)}.purple{color:var(--purple)}.red{color:var(--red)}.muted{color:var(--muted)}.chart{display:block;width:100%;height:180px;touch-action:pan-y}#price-chart{height:265px}.empty{padding:32px;text-align:center;color:var(--muted)}.cursor-line{stroke:#d1dbed;stroke-width:1;stroke-dasharray:4 4;pointer-events:none}.scrubber{display:flex;align-items:center;gap:18px;margin:13px 3px 8px}input[type=range]{accent-color:var(--mint);flex:1;min-width:70px;cursor:pointer}#session-label{font-size:12px;min-width:128px}.readout{font-size:12px;color:var(--muted);min-height:24px;margin-bottom:22px;font-variant-numeric:tabular-nums}.bottom{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.card{padding:18px;border:1px solid var(--edge);border-radius:10px;background:#10192a}.card p{font-size:12px;color:var(--muted);margin:8px 0}.table-wrap{overflow:auto;max-height:235px}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--edge);white-space:nowrap}th{color:var(--muted);font-weight:500;font-size:11px}td:last-child{color:var(--muted)}footer{font-size:11px;color:var(--muted);margin-top:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}noscript{display:block;padding:20px;color:var(--amber)}
+@media(max-width:780px){.shell{padding:18px 14px}.hero{grid-template-columns:1fr;gap:10px}.meta{gap:12px}.toolbar{align-items:stretch}.field{flex:1}#stock{width:100%;min-width:190px}.controls{width:100%;justify-content:space-between;gap:10px}.bottom{grid-template-columns:1fr}header{align-items:start}.badges{justify-content:flex-end}h1{font-size:16px}.eyebrow{font-size:9px}.logo{display:none}.symbol{font-size:28px}.price{font-size:26px}.panel-head{padding:11px 12px 2px}.legend{gap:9px;font-size:10px}.chart{height:170px}#price-chart{height:230px}.range button{min-width:41px;padding:7px}.notice{font-size:11px}.meta dd{font-size:11px}.meta dt{font-size:9px}.scrubber{gap:8px}.readout{font-size:11px}.card{padding:14px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header><div class="brand"><div class="logo" aria-hidden="true">▥</div><div><div class="eyebrow">Local research workspace</div><h1>StockPriceTracker</h1></div></div><div class="badges"><span class="badge demo" id="demo-label" hidden>SYNTHETIC DEMO</span><span class="badge local">OFFLINE SNAPSHOT</span><span class="badge" id="coverage"></span></div></header>
+<div class="toolbar">
+ <div class="field"><label for="stock">Instrument · daily candles</label><select id="stock"></select></div>
+ <div class="controls"><div class="field"><label id="range-label">Visible history</label><div class="range" role="group" aria-labelledby="range-label"><button data-window="21" aria-pressed="false">1M</button><button data-window="63" aria-pressed="false">3M</button><button data-window="126" aria-pressed="true">6M</button><button data-window="252" aria-pressed="false">1Y</button><button data-window="0" aria-pressed="false">All</button></div></div><div class="field"><label for="price-style">Price view</label><select id="price-style"><option value="candles">Candles</option><option value="line">Close line</option></select></div></div>
+</div>
+<section class="hero" aria-label="Instrument and cache details"><div><div class="instrument"><span class="symbol" id="symbol"></span><span class="price" id="last-price"></span></div><div class="sub" id="instrument-meta"></div></div><dl class="meta"><div><dt>Latest bar</dt><dd id="latest-date"></dd></div><div><dt>Source captured · UTC</dt><dd id="capture-date"></dd></div><div><dt>Quote age at generation</dt><dd id="quote-age"></dd></div></dl></section>
+<p class="notice" id="quality" role="note"></p>
+<div id="charts">
+ <section class="panel"><div class="panel-head"><h2>Price &amp; moving averages</h2><div class="legend"><span class="mint" id="sma5-label">SMA 5</span><span class="amber" id="sma20-label">SMA 20</span><span class="muted">▲ SMA match · ● MACD match</span></div></div><svg class="chart" id="price-chart" role="img" aria-label="Daily price candles with SMA 5 and SMA 20"></svg></section>
+ <section class="panel"><div class="panel-head"><h2>MACD <span class="muted">12 / 26 / 9</span></h2><div class="legend"><span class="blue" id="macd-label">MACD</span><span class="purple" id="signal-label">Signal 9</span><span class="muted" id="hist-label">Histogram</span></div></div><svg class="chart" id="macd-chart" role="img" aria-label="MACD, EMA 9 signal and histogram"></svg></section>
+ <section class="panel"><div class="panel-head"><h2>Directional strength <span class="muted">14</span></h2><div class="legend"><span class="purple" id="adx-label">ADX</span><span class="mint" id="plus-label">+DI</span><span class="red" id="minus-label">−DI</span><span class="amber">Threshold 25</span></div></div><svg class="chart" id="adx-chart" role="img" aria-label="ADX 14, positive DI, negative DI and threshold 25"></svg></section>
+</div>
+<div id="empty" class="panel empty" hidden>No usable cache for this instrument.</div>
+<div class="scrubber"><label for="cursor" id="session-label">Selected daily bar</label><input id="cursor" type="range" min="0" max="1" value="1" step="1" aria-describedby="readout"><span class="sub" id="selected-date"></span></div>
+<div class="readout" id="readout" role="status" aria-live="polite"></div>
+<div class="bottom"><section class="card"><h3>Historical rule matches</h3><p>Current upward-cross rules with ADX &gt; 25 after warmup. These are not delivered monitor notifications. Hollow markers are unfinished-candle candidates.</p><div class="table-wrap"><table><caption class="sr-only">Most recent rule matches in the selected visible history</caption><thead><tr><th scope="col">Daily bar</th><th scope="col">Signal</th><th scope="col">ADX</th><th scope="col">Candle at capture</th></tr></thead><tbody id="matches"></tbody></table></div></section><section class="card"><h3>Read this snapshot correctly</h3><p id="provenance"></p><p>Daily indicators use the scanner's original formulas and the full valid cache, before the visible window is trimmed. Gaps or invalid OHLC hide indicators and matches. Short histories retain only initialized values.</p><p>Tokyo Yahoo feeds are listed with a 20-minute delay. The monitor's 600-second provisional gate can suppress such quotes. This chart does not certify live coverage, send alerts, or read delivery state.</p><p>All rendering stays in this file. No requests, analytics, uploads or external assets. The file embeds its displayed prices: keep real-data output private.</p></section></div>
+<footer><span id="generated"></span><span>Hover or touch a chart · Use the session slider for keyboard access</span></footer>
+</main>
+<noscript>This local chart viewer needs JavaScript enabled. It makes no external requests.</noscript>
+<script id="chart-data" type="application/json">__CHART_DATA__</script>
+<script>
+'use strict';
+const data=JSON.parse(document.getElementById('chart-data').textContent);
+const $=id=>document.getElementById(id), ns='http://www.w3.org/2000/svg';
+const colors={sma5:'#64e2bc',sma20:'#f7c76c',macd:'#83adff',macd_signal:'#bf9df8',adx14:'#bf9df8',plus_di14:'#64e2bc',minus_di14:'#fa91a0'};
+const L=62,R=18;
+let W=1100,stock=data.instruments[0],windowSize=126,rows=[],panels=[];
+const finite=Number.isFinite;
+const number=value=>finite(value)?value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'—';
+const money=value=>finite(value)?new Intl.NumberFormat('en-US',{style:'currency',currency:stock.currency,minimumFractionDigits:2,maximumFractionDigits:2}).format(value):'—';
+const stamp=value=>value?value.replace('T',' ').replace('+00:00','').replace('Z','').slice(0,19):'Unknown';
+function ageLabel(seconds){if(!finite(seconds))return 'Unknown timestamp';if(seconds<0)return `${Math.abs(seconds)}s ahead`;if(seconds>=86400)return `${(seconds/86400).toFixed(1)} days old`;if(seconds>=60)return `${(seconds/60).toFixed(1)} min old`;return `${seconds}s old`;}
+function svgNode(tag,attributes={},text){const node=document.createElementNS(ns,tag);for(const [key,value] of Object.entries(attributes))node.setAttribute(key,String(value));if(text!==undefined)node.textContent=text;return node;}
+function xAt(index){return L+(index+.5)*(W-L-R)/Math.max(rows.length,1);}
+function pathFor(field,y){let d='',joined=false;rows.forEach((row,i)=>{if(!finite(row[field])){joined=false;return;}d+=`${joined?'L':'M'}${xAt(i).toFixed(2)},${y(row[field]).toFixed(2)} `;joined=true;});return d;}
+function makePanel(id,fields,height,kind){
+ const svg=$(id);svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${W} ${height}`);svg.setAttribute('preserveAspectRatio','none');
+ const values=rows.flatMap(row=>fields.map(key=>row[key])).filter(finite),hasValues=Boolean(values.length);
+ if(kind==='macd')values.push(0);if(kind==='adx')values.push(0,50);
+ let lo=values.length?Math.min(...values):0,hi=values.length?Math.max(...values):1;
+ const span=hi-lo||Math.max(Math.abs(hi)*.05,1);lo-=span*.08;hi+=span*.08;if(kind==='adx')lo=0;
+ const top=16,bottom=height-29,y=v=>bottom-(v-lo)/(hi-lo)*(bottom-top);
+ for(let i=0;i<4;i++){const value=lo+(hi-lo)*i/3,yy=y(value);svg.append(svgNode('line',{x1:L,y1:yy,x2:W-R,y2:yy,stroke:'#26344a','stroke-width':.8}));svg.append(svgNode('text',{x:L-10,y:yy+4,fill:'#a5b4ca','font-size':11,'text-anchor':'end'},number(value)));}
+ const steps=Math.min(W<600?3:5,rows.length);for(let i=0;i<steps;i++){const index=Math.round(i*(rows.length-1)/Math.max(steps-1,1));svg.append(svgNode('text',{x:xAt(index),y:height-7,fill:'#a5b4ca','font-size':11,'text-anchor':i===0?'start':i===steps-1?'end':'middle'},rows[index].date.slice(2)));}
+ if(kind==='price'&&$('price-style').value==='candles'){
+  const width=Math.max(.9,Math.min(11,(W-L-R)/rows.length*.64));
+  rows.forEach((row,i)=>{if(!finite(row.close))return;const color=row.close>=row.open?'#64e2bc':'#fa91a0',x=xAt(i);svg.append(svgNode('line',{x1:x,y1:y(row.high),x2:x,y2:y(row.low),stroke:color,'stroke-width':1}));svg.append(svgNode('rect',{x:x-width/2,y:Math.min(y(row.open),y(row.close)),width,height:Math.max(1,Math.abs(y(row.open)-y(row.close))),fill:row.completed===true?color:'none',stroke:color,'stroke-width':1}));});
+ } else if(kind==='price')svg.append(svgNode('path',{d:pathFor('close',y),stroke:'#c5d3ec','stroke-width':1.6,fill:'none'}));
+ if(kind==='macd'){
+  rows.forEach((row,i)=>{if(!finite(row.macd_histogram))return;const v=row.macd_histogram;svg.append(svgNode('rect',{x:xAt(i)-(W-L-R)/rows.length*.32,y:Math.min(y(0),y(v)),width:Math.max(.9,(W-L-R)/rows.length*.64),height:Math.max(.7,Math.abs(y(v)-y(0))),fill:v>=0?'#427e70':'#9c5865'}));});
+ }
+ for(const key of fields.filter(key=>colors[key]))svg.append(svgNode('path',{d:pathFor(key,y),stroke:colors[key],'stroke-width':1.7,fill:'none'}));
+ if(kind==='adx'){svg.append(svgNode('line',{x1:L,y1:y(25),x2:W-R,y2:y(25),stroke:'#f7c76c','stroke-width':1,'stroke-dasharray':'5 5'}));svg.append(svgNode('text',{x:W-R-4,y:y(25)-5,fill:'#f7c76c','font-size':11,'text-anchor':'end'},'25'));}
+ if(kind==='price'){
+  for(const match of stock.matches){const i=rows.findIndex(row=>row.date===match.date);if(i<0)continue;match.signals.forEach((key,j)=>{const xx=xAt(i)+(j?6:-3),yy=y(rows[i].low)+10,color=key==='sma5x20'?colors.sma5:colors.macd;
+   const marker=key==='sma5x20'?svgNode('path',{d:`M${xx},${yy-4} l-4,7 h8 Z`}):svgNode('circle',{cx:xx,cy:yy,r:3.5});marker.setAttribute('fill',match.completed?color:'#121c2e');marker.setAttribute('stroke',color);marker.append(svgNode('title',{},`${match.date} ${key}, ADX ${number(match.adx14)}. ${match.completed?'Historical match':'Unfinished candidate'}; not a notification.`));svg.append(marker);
+  });}
+ }
+ if(!hasValues)svg.append(svgNode('text',{x:(W+L)/2,y:height/2,fill:'#a5b4ca','font-size':11,'text-anchor':'middle'},'Indicators unavailable'));
+ const cursor=svgNode('line',{y1:top,y2:bottom,class:'cursor-line'});svg.append(cursor);panels.push(cursor);
+ svg.onpointermove=event=>{const box=svg.getBoundingClientRect(),xx=(event.clientX-box.left)/box.width*W;selectBar(Math.max(0,Math.min(rows.length-1,Math.floor((xx-L)/(W-L-R)*rows.length))));};
+}
+function selectBar(index){
+ if(!rows.length)return;index=Math.max(0,Math.min(rows.length-1,index));const row=rows[index];$('cursor').value=String(index);$('cursor').setAttribute('aria-valuetext',`${row.date}, close ${money(row.close)}`);$('selected-date').textContent=row.date;
+ for(const cursor of panels){cursor.setAttribute('x1',xAt(index));cursor.setAttribute('x2',xAt(index));}
+ for(const [id,key,label] of [['sma5-label','sma5','SMA 5'],['sma20-label','sma20','SMA 20'],['macd-label','macd','MACD'],['signal-label','macd_signal','Signal 9'],['hist-label','macd_histogram','Histogram'],['adx-label','adx14','ADX'],['plus-label','plus_di14','+DI'],['minus-label','minus_di14','−DI']])$(id).textContent=`${label} ${number(row[key])}`;
+ $('readout').textContent=row.missing?`${row.date} · Missing session. No prices or indicators are interpolated.`:`${row.date} · O ${money(row.open)} / H ${money(row.high)} / L ${money(row.low)} / C ${money(row.close)} · SMA5 ${number(row.sma5)} · SMA20 ${number(row.sma20)} · MACD ${number(row.macd)} / Signal ${number(row.macd_signal)} / Hist ${number(row.macd_histogram)} · ADX ${number(row.adx14)} / +DI ${number(row.plus_di14)} / −DI ${number(row.minus_di14)} · ${row.completed===true?'Completed at capture':row.completed===false?'Unfinished at capture':'Completion unverified'}`;
+}
+function draw(){
+ rows=windowSize?stock.rows.slice(-windowSize):stock.rows;panels=[];
+ W=Math.max(320,document.querySelector('.shell').clientWidth-parseFloat(getComputedStyle(document.querySelector('.shell')).paddingLeft)*2-2);
+ $('charts').hidden=!rows.length;$('empty').hidden=Boolean(rows.length);$('cursor').disabled=!rows.length;
+ $('cursor').max=String(Math.max(rows.length-1,0));$('readout').textContent='';$('selected-date').textContent='';
+ for(const button of document.querySelectorAll('[data-window]'))button.setAttribute('aria-pressed',String(Number(button.dataset.window)===windowSize));
+ if(rows.length){makePanel('price-chart',['low','high','sma5','sma20'],245,'price');makePanel('macd-chart',['macd','macd_signal','macd_histogram'],168,'macd');makePanel('adx-chart',['adx14','plus_di14','minus_di14'],168,'adx');selectBar(rows.length-1);}
+ const body=$('matches');body.replaceChildren();const visible=new Set(rows.map(row=>row.date)),matches=stock.matches.filter(match=>visible.has(match.date)).slice(-12).reverse();
+ for(const match of matches){const tr=document.createElement('tr');for(const value of [match.date,match.signals.map(key=>key==='sma5x20'?'SMA ↑':'MACD ↑').join(' + '),number(match.adx14),match.completed?'Completed':'Unfinished candidate']){const td=document.createElement('td');td.textContent=value;tr.append(td);}body.append(tr);}
+ if(!matches.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=4;td.textContent='No verified rule matches in this window.';tr.append(td);body.append(tr);}
+}
+function chooseStock(){
+ stock=data.instruments[Number($('stock').value)];const last=stock.rows.filter(row=>!row.missing).at(-1);
+ $('symbol').textContent=stock.symbol;$('last-price').textContent=money(last?.close);$('instrument-meta').textContent=`${stock.market==='jp'?'Japan':'United States'} · ${stock.currency} · ${stock.bar_count||0} cached daily bars · ${data.synthetic?'Synthetic values':'Local cache'}`;
+ $('latest-date').textContent=stock.latest_bar_date||'Unavailable';$('capture-date').textContent=stamp(stock.captured_at_utc);$('quote-age').textContent=ageLabel(stock.quote_age_seconds);
+ $('quality').className='notice'+(stock.status==='blocked'||stock.status==='unavailable'?' error':'');
+ const summary=`${stock.quote_status||'Cache unavailable'} · Offline snapshot, never live health.`;
+ $('quality').textContent=summary+(stock.warnings.length?' '+stock.warnings.join(' '):` ${stock.bar_count} valid daily bars; ${stock.warmup_bars}-bar marker warmup.`);
+ $('provenance').textContent=`Source: ${stock.provider||'No usable provider record'}. Captured ${stamp(stock.captured_at_utc)} UTC. Last trade ${stamp(stock.last_trade_at_utc)} UTC. Completion cutoff ${stock.completed_through||'unverified'}. Age is measured at file generation, not browser-open time.`;
+ draw();
+}
+for(const [index,item] of data.instruments.entries()){const option=document.createElement('option');option.value=String(index);option.textContent=`${item.symbol} · ${item.currency}${item.rows.length?'':' · unavailable'}`;$('stock').append(option);}
+$('coverage').textContent=`${data.instruments.filter(item=>item.rows.length).length} / ${data.instruments.length} caches`;$('demo-label').hidden=!data.synthetic;$('generated').textContent=`Generated ${stamp(data.generated_at_utc)} UTC · Scanner ${data.scanner_version}`;
+$('stock').onchange=chooseStock;$('price-style').onchange=draw;$('cursor').oninput=()=>selectBar(Number($('cursor').value));
+for(const button of document.querySelectorAll('[data-window]'))button.onclick=()=>{windowSize=Number(button.dataset.window);draw();};
+window.addEventListener('resize',draw);
+chooseStock();
+</script>
+</body>
+</html>

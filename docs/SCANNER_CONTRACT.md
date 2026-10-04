@@ -1,7 +1,8 @@
 # Scanner verification contract
 
-The production modules, configuration and calendar files are unchanged from
-scanner 1.3.0. The only original test change replaces an excluded private state
+The original scanner modules, configuration and calendar files are unchanged
+from scanner 1.3.0. The local chart generator reuses those functions. The only
+original test change replaces an excluded private state
 file with generated temporary state; all its assertions remain intact.
 
 ## Source-grounded behavior
@@ -26,7 +27,7 @@ file with generated temporary state; all its assertions remain intact.
 ## Tests
 
 Run `python3 -m unittest discover -s tests -v` from the repository root.
-The full suite contains 64 tests and uses no real prices or production state.
+The full suite contains 78 tests and uses no real prices or production state.
 
 The existing suites verify indicator calculations, warmup, sessions and calendar
 expiry; independent signals and strict ADX gating; provisional revalidation and
@@ -47,6 +48,12 @@ serialization preserving the prior state file, and Git exclusion boundaries.
 The handwritten `tests/fixtures/signal_cases.json` values are synthetic. Numeric
 cases exercise `event_qualifies`; timing and interval cases are covered through
 provider/provisional tests because numeric event eligibility has no clock input.
+
+Local chart tests compare every displayed indicator field and historical match
+with the existing scanner functions, and cover gaps, short histories, currency,
+exchange-local dates, cache timestamps, malformed input, safe HTML embedding,
+private atomic output and read-only operation. Chart markers never establish
+that a monitor notification was delivered; no delivery state is read.
 
 The full verification run also guards provider network entry points in the test
 process. The CLI subprocess test explicitly uses offline replay. No Yahoo

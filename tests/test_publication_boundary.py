@@ -41,6 +41,8 @@ class PublicationBoundaryTests(unittest.TestCase):
             ".agents/skills/anything/SKILL.md", "unknown.py",
             "stock_monitor/state.json", "stock_monitor/private.py",
             "state-next.json", "latest.json", "raw/NVDA.json",
+            "local-charts/index.html", "local-charts/demo.html",
+            "examples/real-cache.json", "charts.html",
         ):
             with self.subTest(path=path):
                 self.assertTrue(self.ignored(path))
@@ -52,6 +54,8 @@ class PublicationBoundaryTests(unittest.TestCase):
             "config.json", "verified_exchange_sessions_2024_2027.json",
             "stock_monitor/__main__.py", "stock_monitor/calendars.json",
             "tests/test_cycle.py", "tests/test_publication_contract.py",
+            "stock_monitor/charts.py", "stock_monitor/chart_view.html",
+            "examples/synthetic_charts.py", "tests/test_charts.py", "docs/LOCAL_CHARTS.md",
         ):
             with self.subTest(path=path):
                 self.assertFalse(self.ignored(path))

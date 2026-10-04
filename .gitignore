@@ -27,3 +27,9 @@
 !tests/test_provisional.py
 !tests/test_signal_rules.py
 !tests/test_publication_contract.py
+!stock_monitor/charts.py
+!stock_monitor/chart_view.html
+!tests/test_charts.py
+!examples/
+!examples/synthetic_charts.py
+!docs/LOCAL_CHARTS.md

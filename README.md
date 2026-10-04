@@ -93,6 +93,30 @@ For an offline CLI replay, provide a private directory containing one
 without replay mode. The closed-market CLI test demonstrates a complete cycle
 with synthetic state and an empty replay directory.
 
+## Local indicator charts
+
+Generate a self-contained, switchable dashboard from existing private cache files:
+
+```sh
+python3 -m stock_monitor.charts --raw-dir /path/to/private/raw-cache \
+  --output local-charts/indicators.html
+
+# Or try all 25 instruments with invented prices and no provider access:
+python3 examples/synthetic_charts.py --output local-charts/demo.html
+```
+
+Open the generated HTML locally. It includes candles/SMA5/20, MACD/signal/histogram
+and ADX/+DI/-DI, with a stock selector, visible ranges, synchronized hover and
+keyboard readouts. It reuses the original indicator functions and labels cache
+timestamps, gaps, warmup and stale quotes. Historical cross markers are **not
+delivered notifications**. Real-data charts have not been generated or validated
+by the synthetic demo. All rendering stays local; no external assets or uploads.
+
+The HTML embeds displayed prices and must stay private. Generated files are
+Git-ignored; no public site or automation is enabled. See
+[local chart usage and limitations](docs/LOCAL_CHARTS.md) for input format,
+completion checks, quality handling and retention details.
+
 ## Configuration
 
 The default `config.json` defines each instrument's display ticker, provider
