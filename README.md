@@ -6,6 +6,12 @@ event outbox. It does not send notifications, place trades, or install a schedul
 The imported scanner version is **1.3.0**; its formulas and configuration are
 unchanged by this publication.
 
+This is a source repository, not an already deployed monitoring service.
+The project keeps calculations deterministic and dependency-free, fails closed
+when daily data or calendars are invalid, and separates event detection from
+delivery. Explicit local state makes runs resumable and prevents duplicate
+events; independent synthetic references check the numerical conventions.
+
 ## Signals and timing
 
 Two upward-cross signals are evaluated independently: SMA5 crosses above SMA20,
@@ -29,9 +35,13 @@ source references and limitations are retained in the calendar JSON files.
 ## Offline verification
 
 The scanner uses the Python standard library. IANA timezone data must be
-available for `zoneinfo`. Run from this checkout:
+available for `zoneinfo` (including `America/New_York` and `Asia/Tokyo`). No
+third-party Python packages are required on a system with that timezone data.
+Obtain the source and run the synthetic checks before using a live provider:
 
 ```sh
+git clone https://github.com/kyon-phy/StockPriceTracker.git
+cd StockPriceTracker
 python3 -m unittest discover -s tests -v
 python3 -m stock_monitor --help
 ```
@@ -46,6 +56,16 @@ For an offline CLI replay, provide a private directory containing one
 `--replay-dir` and a timezone-aware `--as-of`; a fake evaluation time is rejected
 without replay mode. The closed-market CLI test demonstrates a complete cycle
 with synthetic state and an empty replay directory.
+
+## Configuration
+
+The default `config.json` defines each instrument's display ticker, provider
+symbol and `us`/`jp` market. It also sets 250 warmup bars, a 30-minute publication
+delay, 1.1-second spacing between live requests and a 600-second provisional
+quote-age ceiling. Select a separate file with `--config /path/to/config.json`
+or restrict a run with `--market us` / `--market jp`; the default is `all`.
+The indicator periods and strict ADX threshold are defined in source, not
+arbitrary configuration fields. Review and test any changes before operational use.
 
 ## Manual local use
 
@@ -82,6 +102,20 @@ reports use a 10:00 inclusive to next-day 03:00 exclusive Asia/Tokyo window;
 this filtering does not schedule or send anything. Provisional events require
 fresh revalidation before inclusion in the deliverable outbox.
 
+Copy an exact ID from the delivered report's `pending_events`, then acknowledge
+it locally. The acknowledgement path makes no provider request:
+
+```sh
+# Replace the placeholder only after that exact event was successfully delivered.
+EVENT_ID='PASTE_EXACT_DELIVERED_EVENT_ID'
+python3 -m stock_monitor --state "$STOCKPRICE_DATA/state.json" \
+  --state-out "$STOCKPRICE_DATA/state.json" --ack "$EVENT_ID"
+```
+
+Event IDs distinguish the symbol, daily bar, signal family and provisional mode.
+Keeping the same state prevents rediscovery; acknowledgement changes delivery
+status. Failed or unconfirmed deliveries must remain pending for later handling.
+
 ## Data retention and publication boundary
 
 | Output | Local behavior |
@@ -104,7 +138,16 @@ content being added to an allowed file or forced into Git: inspect every staged
 blob and its history before publishing. No public data artifacts or workflows
 are included.
 
-## Licensing
+## Source and licensing limits
+
+The provider is an unofficial public Yahoo Finance endpoint. Prices may be
+delayed, revised or unavailable, and the code establishes no availability or
+data-licensing guarantee. HTTP 401/403/429 stop further live reads for that run;
+the client does not bypass access controls. Offline tests validate calculations
+and control flow, not live Yahoo access or future market-calendar changes.
+No live Yahoo requests were used to validate this publication. Review the data
+provider's applicable terms before collecting, storing or redistributing data.
+The output describes technical conditions and is not investment advice.
 
 No license file or license grant was included in the imported source. This
 publication does not invent one. Public visibility alone is not an additional
