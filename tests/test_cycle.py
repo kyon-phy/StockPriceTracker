@@ -55,8 +55,14 @@ class TestCycle(unittest.TestCase):
         root=Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as d:
             d=Path(d);(d/'empty-replay').mkdir()
+            now=datetime.fromisoformat('2026-10-02T08:00:00+00:00')
+            config=json.loads((root/'config.json').read_text())
+            state=empty_state();state.pop('ruleset');state['revision']=1
+            for item in config['universe']:
+                state['tickers'].update(self.state_at(now,item)['tickers'])
+            baseline=d/'synthetic-state.json';baseline.write_text(json.dumps(state))
             # Empty replay directory proves no provider payload is accessed.
-            cmd=[sys.executable,'-m','stock_monitor','--mode','cycle','--state',str(root/'data/baseline-state.json'),
+            cmd=[sys.executable,'-m','stock_monitor','--mode','cycle','--state',str(baseline),
                  '--replay-dir',str(d/'empty-replay'),'--as-of','2026-10-02T08:00:00Z','--state-out',str(d/'state.json'),'--output',str(d/'out.json')]
             run=subprocess.run(cmd,cwd=root,capture_output=True,text=True);self.assertEqual(run.returncode,0,run.stderr)
             r=json.loads((d/'out.json').read_text());self.assertEqual(r['skipped_count'],25);self.assertEqual(r['network_fetch_count'],0)

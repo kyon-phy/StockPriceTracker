@@ -1,0 +1,405 @@
+{
+  "synthetic_only": true,
+  "description": "Hand-authored synthetic indicator values for the upward-only scanner rules. Timing/interval expectations are separate from numeric event eligibility.",
+  "cases": [
+    {
+      "name": "sma_up_independent",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "SMA_UP"
+      ]
+    },
+    {
+      "name": "sma_down_independent_does_not_alert",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "macd_up_independent",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "MACD_UP"
+      ]
+    },
+    {
+      "name": "macd_down_independent_does_not_alert",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "both_families_cross",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "SMA_UP",
+        "MACD_UP"
+      ]
+    },
+    {
+      "name": "no_cross",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "sma_adx_equal_25",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 25,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "sma_adx_below_25",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 24.999,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "sma_adx_above_25",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 25.001,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "SMA_UP"
+      ]
+    },
+    {
+      "name": "macd_adx_equal_25",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 25,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "macd_adx_above_25",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 25.001,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "MACD_UP"
+      ]
+    },
+    {
+      "name": "sma_freshness_600",
+      "interval": "1d",
+      "age_seconds": 600,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "SMA_UP"
+      ]
+    },
+    {
+      "name": "sma_freshness_601",
+      "interval": "1d",
+      "age_seconds": 601,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "macd_freshness_600",
+      "interval": "1d",
+      "age_seconds": 600,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "MACD_UP"
+      ]
+    },
+    {
+      "name": "macd_freshness_601",
+      "interval": "1d",
+      "age_seconds": 601,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "non_daily_input_is_ineligible",
+      "interval": "1h",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "sma_previous_equality_cross",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 10,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 11,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "SMA_UP"
+      ]
+    },
+    {
+      "name": "sma_current_equality_is_not_cross",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 10,
+        "sma20": 10,
+        "macd12_26": -0.5,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    },
+    {
+      "name": "macd_previous_equality_cross",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": 0,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 1,
+        "signal_ema9": 0
+      },
+      "expected_events": [
+        "MACD_UP"
+      ]
+    },
+    {
+      "name": "macd_current_equality_is_not_cross",
+      "interval": "1d",
+      "age_seconds": 0,
+      "adx14": 30,
+      "previous": {
+        "sma5": 9,
+        "sma20": 10,
+        "macd12_26": -1,
+        "signal_ema9": 0
+      },
+      "current": {
+        "sma5": 9.5,
+        "sma20": 10,
+        "macd12_26": 0,
+        "signal_ema9": 0
+      },
+      "expected_events": []
+    }
+  ]
+}
