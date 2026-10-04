@@ -32,6 +32,40 @@ uses exchange-session dates and history completeness. The default universe has
 2024-01-01 through 2027-12-31 and fail closed outside that range. Their published
 source references and limitations are retained in the calendar JSON files.
 
+## Provider delay and provisional coverage
+
+Yahoo data is **not uniformly real-time or uniformly 20 minutes delayed**.
+The published [Yahoo exchange-delay table](https://help.yahoo.com/kb/account/SLN2310.html)
+lists **Tokyo Stock Exchange (`.T`) at 20 minutes**. US feed listings vary: for
+example, Nasdaq Stock Exchange is listed as real-time and OTC Markets Group as
+15 minutes. These are feed listings, not a timeliness guarantee for this
+unofficial chart endpoint or any individual response.
+
+Documentation check: **2026-10-04**. The indexed official Yahoo Help table was
+read; direct page access returned rate/access errors, so the current live table
+and actual endpoint latency were not independently confirmed. Recheck the
+official listing before relying on operational coverage.
+
+This scanner uses Python's `urllib.request`, **not `yfinance`**.
+[yfinance](https://ranaroussi.github.io/yfinance/) is a separate client library for
+Yahoo data, not a guarantee of real-time delivery. Changing the client library
+does not remove upstream exchange/feed delays.
+
+The scanner measures provisional quote age from the returned `regularMarketTime`
+against the evaluation clock; a successful download is not proof of freshness.
+The unchanged **600-second (10-minute) gate rejects a quote 20 minutes old
+(1,200 seconds)** with `quote_stale_or_time_inconsistent`. Such a quote produces
+no eligible provisional alert. If the Tokyo feed consistently has its listed
+20-minute delay, this gate can consistently suppress Japanese provisional alerts.
+**Japanese active-session alert coverage has not been validated.** Closed-market
+skips and synthetic tests prove control flow, not live Japanese quote timeliness.
+
+Confirmed mode processes completed daily bars after the configured publication
+delay and history checks. That is different from timely intraday detection;
+completed daily-bar support is not a promise of timely provisional alerts.
+No threshold, formula or provider was changed to accommodate delayed data, and
+no live Yahoo quote probe was made for this documentation check.
+
 ## Offline verification
 
 Use Python 3.11 or newer. The scanner uses the Python standard library. IANA
