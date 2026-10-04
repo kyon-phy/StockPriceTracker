@@ -1,6 +1,6 @@
 # StockPriceTracker
 
-A Python 3.9+ daily stock scanner for 25 US and Japanese instruments. It reads
+A Python 3.11+ daily stock scanner for 25 US and Japanese instruments. It reads
 public Yahoo Finance daily charts and produces local JSON reports and a durable
 event outbox. It does not send notifications, place trades, or install a schedule.
 The imported scanner version is **1.3.0**; its formulas and configuration are
@@ -34,9 +34,10 @@ source references and limitations are retained in the calendar JSON files.
 
 ## Offline verification
 
-The scanner uses the Python standard library. IANA timezone data must be
-available for `zoneinfo` (including `America/New_York` and `Asia/Tokyo`). No
-third-party Python packages are required on a system with that timezone data.
+Use Python 3.11 or newer. The scanner uses the Python standard library. IANA
+timezone data must be available for `zoneinfo` (including `America/New_York` and
+`Asia/Tokyo`). No third-party Python packages are required on a system with that
+timezone data.
 Obtain the source and run the synthetic checks before using a live provider:
 
 ```sh
@@ -50,6 +51,7 @@ Tests generate synthetic prices and temporary state. They need no production
 files, provider account, or network requests. The numerical reference tests
 check SMA, DI/ADX, MACD and seeding independently. See
 [the verification contract](docs/SCANNER_CONTRACT.md) for boundary and safety tests.
+Publication validation ran on Python 3.12.14.
 
 For an offline CLI replay, provide a private directory containing one
 `SYMBOL.json` per required symbol, with `payload` and `source` keys. Use
