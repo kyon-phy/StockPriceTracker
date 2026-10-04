@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "researched_at_utc": "2026-10-02T07:54:00Z",
+  "valid_from": "2024-01-01",
+  "valid_through": "2027-12-31",
+  "scope": "Common-stock regular/core sessions only; weekends excluded separately; not derivatives, settlement, pre-market or post-market sessions.",
+  "warnings": [
+    "Published calendars can change following emergency closures or holiday-law changes. Future calendars are published schedules, not a guarantee.",
+    "No dates outside valid_from/valid_through are certified. Refresh and verify rather than applying an unlimited inferred holiday algorithm.",
+    "Nasdaq 2027 dates presently use the NYSE common-US-equities schedule; independently found Nasdaq published calendars cover 2024-2026 only."
+  ],
+  "sources": {
+    "nyse_2024_2026": "https://s2.q4cdn.com/154085107/files/doc_news/NYSE-Group-Announces-2024-2025-and-2026-Holiday-and-Early-Closings-Calendar-2023.pdf",
+    "nyse_2026_2028_hours": "https://www.nyse.com/trade/hours-calendars",
+    "nyse_2025_carter": "https://ir.theice.com/press/news-details/2024/The-New-York-Stock-Exchange-Will-Close-Markets-on-January-9-to-Honor-the-Passing-of-Former-President-Jimmy-Carter-on-National-Day-of-Mourning/default.aspx",
+    "nasdaq_2024": "https://www.nasdaqtrader.com/content/technicalsupport/2024tradingcalendar.pdf",
+    "nasdaq_2025": "https://www.nasdaqtrader.com/content/technicalsupport/2025tradingcalendar.pdf",
+    "nasdaq_2026": "https://www.nasdaqtrader.com/Trader.aspx?id=Calendar",
+    "nasdaq_2025_carter": "https://ir.nasdaq.com/news-releases/news-release-details/nasdaq-announces-closure-its-us-markets-honor-national-day-0",
+    "jpx_current_calendar": "https://www.jpx.co.jp/english/corporate/about-jpx/calendar/index.html",
+    "jpx_equity_hours_and_holidays": "https://www.jpx.co.jp/english/equities/trading/domestic/01.html",
+    "jpx_hours_change": "https://www.jpx.co.jp/english/corporate/news/news-releases/1030/20230920-01.html",
+    "japan_official_holidays_page": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html",
+    "japan_official_holidays_csv": "https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv",
+    "yahoo_close_definitions": "https://ca.finance.yahoo.com/quote/AAPL/history/",
+    "yahoo_adjusted_close_help": "https://in.help.yahoo.com/kb/adjusted-close-sln28256.html",
+    "jpx_hours_change_went_live": "https://www.jpx.co.jp/english/systems/equities-trading/01.html",
+    "jpx_hours_change_launch_release": "https://www.jpx.co.jp/english/corporate/news/news-releases/1030/dh3otn000000jnn5-att/dh3otn000000jnq1.pdf"
+  },
+  "US": {
+    "timezone": "America/New_York",
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "regular_open": "09:30",
+    "regular_close": "16:00",
+    "early_close_time": "13:00",
+    "full_day_closures": {
+      "2024": [
+        "2024-01-01",
+        "2024-01-15",
+        "2024-02-19",
+        "2024-03-29",
+        "2024-05-27",
+        "2024-06-19",
+        "2024-07-04",
+        "2024-09-02",
+        "2024-11-28",
+        "2024-12-25"
+      ],
+      "2025": [
+        "2025-01-01",
+        "2025-01-09",
+        "2025-01-20",
+        "2025-02-17",
+        "2025-04-18",
+        "2025-05-26",
+        "2025-06-19",
+        "2025-07-04",
+        "2025-09-01",
+        "2025-11-27",
+        "2025-12-25"
+      ],
+      "2026": [
+        "2026-01-01",
+        "2026-01-19",
+        "2026-02-16",
+        "2026-04-03",
+        "2026-05-25",
+        "2026-06-19",
+        "2026-07-03",
+        "2026-09-07",
+        "2026-11-26",
+        "2026-12-25"
+      ],
+      "2027": [
+        "2027-01-01",
+        "2027-01-18",
+        "2027-02-15",
+        "2027-03-26",
+        "2027-05-31",
+        "2027-06-18",
+        "2027-07-05",
+        "2027-09-06",
+        "2027-11-25",
+        "2027-12-24"
+      ]
+    },
+    "early_closes": {
+      "2024": [
+        "2024-07-03",
+        "2024-11-29",
+        "2024-12-24"
+      ],
+      "2025": [
+        "2025-07-03",
+        "2025-11-28",
+        "2025-12-24"
+      ],
+      "2026": [
+        "2026-11-27",
+        "2026-12-24"
+      ],
+      "2027": [
+        "2027-11-26"
+      ]
+    },
+    "special_closures": {
+      "2025-01-09": "National Day of Mourning for President Jimmy Carter"
+    },
+    "notes": [
+      "2026-07-02 and 2027-07-02 are normal 16:00 closes on the NYSE schedule.",
+      "2027-12-31 is a normal session: 2028 New Year falls on Saturday and no preceding-Friday observance is declared.",
+      "Use an IANA timezone, not a fixed EST offset, to account for DST.",
+      "Nasdaq 2024 and 2025 PDF calendar holiday/early-close markers were visually checked. The static 2025 PDF omits Jan 9; the Carter announcement supplies that override."
+    ]
+  },
+  "JP": {
+    "timezone": "Asia/Tokyo",
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "sessions": [
+      {
+        "valid_from": "2024-01-01",
+        "valid_through": "2024-11-04",
+        "morning_open": "09:00",
+        "morning_close": "11:30",
+        "afternoon_open": "12:30",
+        "close": "15:00"
+      },
+      {
+        "valid_from": "2024-11-05",
+        "valid_through": "2027-12-31",
+        "morning_open": "09:00",
+        "morning_close": "11:30",
+        "afternoon_open": "12:30",
+        "close": "15:30"
+      }
+    ],
+    "full_day_closures": {
+      "2024": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-08",
+        "2024-02-12",
+        "2024-02-23",
+        "2024-03-20",
+        "2024-04-29",
+        "2024-05-03",
+        "2024-05-06",
+        "2024-07-15",
+        "2024-08-12",
+        "2024-09-16",
+        "2024-09-23",
+        "2024-10-14",
+        "2024-11-04",
+        "2024-12-31"
+      ],
+      "2025": [
+        "2025-01-01",
+        "2025-01-02",
+        "2025-01-03",
+        "2025-01-13",
+        "2025-02-11",
+        "2025-02-24",
+        "2025-03-20",
+        "2025-04-29",
+        "2025-05-05",
+        "2025-05-06",
+        "2025-07-21",
+        "2025-08-11",
+        "2025-09-15",
+        "2025-09-23",
+        "2025-10-13",
+        "2025-11-03",
+        "2025-11-24",
+        "2025-12-31"
+      ],
+      "2026": [
+        "2026-01-01",
+        "2026-01-02",
+        "2026-01-12",
+        "2026-02-11",
+        "2026-02-23",
+        "2026-03-20",
+        "2026-04-29",
+        "2026-05-04",
+        "2026-05-05",
+        "2026-05-06",
+        "2026-07-20",
+        "2026-08-11",
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-10-12",
+        "2026-11-03",
+        "2026-11-23",
+        "2026-12-31"
+      ],
+      "2027": [
+        "2027-01-01",
+        "2027-01-11",
+        "2027-02-11",
+        "2027-02-23",
+        "2027-03-22",
+        "2027-04-29",
+        "2027-05-03",
+        "2027-05-04",
+        "2027-05-05",
+        "2027-07-19",
+        "2027-08-11",
+        "2027-09-20",
+        "2027-09-23",
+        "2027-10-11",
+        "2027-11-03",
+        "2027-11-23",
+        "2027-12-31"
+      ]
+    },
+    "listed_holidays_including_weekends": {
+      "2024": {
+        "2024-01-01": "元日",
+        "2024-01-02": "Market Holiday",
+        "2024-01-03": "Market Holiday",
+        "2024-01-08": "成人の日",
+        "2024-02-11": "建国記念の日",
+        "2024-02-12": "休日",
+        "2024-02-23": "天皇誕生日",
+        "2024-03-20": "春分の日",
+        "2024-04-29": "昭和の日",
+        "2024-05-03": "憲法記念日",
+        "2024-05-04": "みどりの日",
+        "2024-05-05": "こどもの日",
+        "2024-05-06": "休日",
+        "2024-07-15": "海の日",
+        "2024-08-11": "山の日",
+        "2024-08-12": "休日",
+        "2024-09-16": "敬老の日",
+        "2024-09-22": "秋分の日",
+        "2024-09-23": "休日",
+        "2024-10-14": "スポーツの日",
+        "2024-11-03": "文化の日",
+        "2024-11-04": "休日",
+        "2024-11-23": "勤労感謝の日",
+        "2024-12-31": "Market Holiday"
+      },
+      "2025": {
+        "2025-01-01": "元日",
+        "2025-01-02": "Market Holiday",
+        "2025-01-03": "Market Holiday",
+        "2025-01-13": "成人の日",
+        "2025-02-11": "建国記念の日",
+        "2025-02-23": "天皇誕生日",
+        "2025-02-24": "休日",
+        "2025-03-20": "春分の日",
+        "2025-04-29": "昭和の日",
+        "2025-05-03": "憲法記念日",
+        "2025-05-04": "みどりの日",
+        "2025-05-05": "こどもの日",
+        "2025-05-06": "休日",
+        "2025-07-21": "海の日",
+        "2025-08-11": "山の日",
+        "2025-09-15": "敬老の日",
+        "2025-09-23": "秋分の日",
+        "2025-10-13": "スポーツの日",
+        "2025-11-03": "文化の日",
+        "2025-11-23": "勤労感謝の日",
+        "2025-11-24": "休日",
+        "2025-12-31": "Market Holiday"
+      },
+      "2026": {
+        "2026-01-01": "元日",
+        "2026-01-02": "Market Holiday",
+        "2026-01-03": "Market Holiday",
+        "2026-01-12": "成人の日",
+        "2026-02-11": "建国記念の日",
+        "2026-02-23": "天皇誕生日",
+        "2026-03-20": "春分の日",
+        "2026-04-29": "昭和の日",
+        "2026-05-03": "憲法記念日",
+        "2026-05-04": "みどりの日",
+        "2026-05-05": "こどもの日",
+        "2026-05-06": "休日",
+        "2026-07-20": "海の日",
+        "2026-08-11": "山の日",
+        "2026-09-21": "敬老の日",
+        "2026-09-22": "休日",
+        "2026-09-23": "秋分の日",
+        "2026-10-12": "スポーツの日",
+        "2026-11-03": "文化の日",
+        "2026-11-23": "勤労感謝の日",
+        "2026-12-31": "Market Holiday"
+      },
+      "2027": {
+        "2027-01-01": "元日",
+        "2027-01-02": "Market Holiday",
+        "2027-01-03": "Market Holiday",
+        "2027-01-11": "成人の日",
+        "2027-02-11": "建国記念の日",
+        "2027-02-23": "天皇誕生日",
+        "2027-03-21": "春分の日",
+        "2027-03-22": "休日",
+        "2027-04-29": "昭和の日",
+        "2027-05-03": "憲法記念日",
+        "2027-05-04": "みどりの日",
+        "2027-05-05": "こどもの日",
+        "2027-07-19": "海の日",
+        "2027-08-11": "山の日",
+        "2027-09-20": "敬老の日",
+        "2027-09-23": "秋分の日",
+        "2027-10-11": "スポーツの日",
+        "2027-11-03": "文化の日",
+        "2027-11-23": "勤労感謝の日",
+        "2027-12-31": "Market Holiday"
+      }
+    },
+    "early_closes": {
+      "2024": [],
+      "2025": [],
+      "2026": [],
+      "2027": []
+    },
+    "notes": [
+      "2024 and 2025 dates reconstructed from the official Cabinet Office national-holiday CSV plus TSE statutory exchange closure rules for Jan 1-3 and Dec 31.",
+      "2026 and 2027 dates also checked directly against current JPX published market calendar.",
+      "2026-09-22 is a full-day holiday between two national holidays.",
+      "2024-11-04 is closed; 2024-11-05 is the first session with the 15:30 close. No scheduled TSE half-days are listed.",
+      "JPX confirms arrowhead4.0 went live on Nov 5 2024. Continuous trading now ends 15:25, followed by pre-closing order acceptance and the 15:30 closing auction; daily completed close must use 15:30."
+    ],
+    "cabinet_office_csv_sha256": "cec37a743c96995cdb9cb52b685c9003634682a9b0e1a640a6b9b96881fe964a"
+  },
+  "yahoo_prices": {
+    "close": "Yahoo historical Close is split-adjusted; not dividend-adjusted.",
+    "adjclose": "Adjusted for splits and dividend and/or capital-gain distributions.",
+    "ohlc_caution": "The official Yahoo historical table explicitly defines Close and Adj Close. An official public v8/chart API contract or explicit Yahoo definition of O/H/L was not found; do not describe Yahoo Close as wholly unadjusted/raw or claim a documented API guarantee.",
+    "sources": [
+      "yahoo_close_definitions",
+      "yahoo_adjusted_close_help"
+    ]
+  }
+}
